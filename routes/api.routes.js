@@ -11,6 +11,8 @@ router.post('/addSchool', schoolController.addSchool);
 
 router.get('/listSchools', schoolController.listSchools);
 
+router.delete('/deleteSchool/:id', schoolController.deleteSchool);
+
 
 
 

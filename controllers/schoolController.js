@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+//addSchool
 exports.addSchool = (req, res) => {
 
   console.log(req.body);
@@ -38,6 +39,9 @@ exports.addSchool = (req, res) => {
 };
 
 
+
+
+//listSchools
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of Earth in KM
   const toRad = (value) => (value * Math.PI) / 180;
@@ -84,7 +88,37 @@ exports.listSchools = (req, res) => {
       })
       .sort((a, b) => a.distance - b.distance);
 
-      
     return res.json(sortedSchools);
   });
+};
+
+
+//deleteSchool
+
+exports.deleteSchool = (req, res) => {
+
+  console.log(req.body);
+
+  try {
+
+    const id = req.params.id;
+
+    db.query('delete from school where id = ?', [id], (err, result) => {
+      if (err) {
+        console.log("error = ", err);
+        return res.status(500).json({ "error": "Database Error" });
+      }
+
+      console.log("Successfully Deleted..!");
+      return res.status(201).json({
+        message: 'School Deleted successfully',
+        schoolId: result.deleteId
+      });
+    }
+    );
+  }
+  catch (err) {
+    console.log("Error", err);
+    return res.status(400).json({ "error": err });
+  }
 };
