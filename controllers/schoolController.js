@@ -71,7 +71,7 @@ exports.listSchools = (req, res) => {
   const userLat = parseFloat(latitude);
   const userLon = parseFloat(longitude);
 
-  db.query('SELECT * FROM school', (err, results) => {
+  db.query('select * from school', (err, results) => {
     if (err) {
       return res.status(500).json({ error: 'Database error.' });
     }
@@ -94,31 +94,27 @@ exports.listSchools = (req, res) => {
 
 
 //deleteSchool
-
 exports.deleteSchool = (req, res) => {
+  const id = req.params.id;
 
-  console.log(req.body);
+  if (!id) {
+    return res.status(400).json({ error: "Missing school ID in request parameters" });
+  }
 
-  try {
-
-    const id = req.params.id;
-
-    db.query('delete from school where id = ?', [id], (err, result) => {
-      if (err) {
-        console.log("error = ", err);
-        return res.status(500).json({ "error": "Database Error" });
-      }
-
-      console.log("Successfully Deleted..!");
-      return res.status(201).json({
-        message: 'School Deleted successfully',
-        schoolId: result.deleteId
-      });
+  db.query('delete from school where id = ?', [id], (err, result) => {
+    if (err) {
+      console.error("Database error: ", err);
+      return res.status(500).json({ error: "Database Error" });
     }
-    );
-  }
-  catch (err) {
-    console.log("Error", err);
-    return res.status(400).json({ "error": err });
-  }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "School not found" });
+    }
+
+    console.log("School successfully deleted!");
+    return res.status(200).json({
+      message: 'School deleted successfully',
+      deletedSchoolId: id
+    });
+  });
 };
