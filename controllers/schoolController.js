@@ -84,6 +84,7 @@ exports.listSchools = (req, res) => {
       })
       .sort((a, b) => a.distance - b.distance);
 
+      
     return res.json(sortedSchools);
   });
 };
