@@ -6,96 +6,115 @@ A Node.js and Express.js RESTful API for managing school data, built as part of 
 
 ## Features
 
-Add a new school with location details
-List schools sorted by distance to the user’s location
-Delete a school by ID
-Postman Collection for testing included
+* Add a new school with location details
+* List schools sorted by distance to the user’s location
+* Delete a school by ID
+* Postman Collection for testing included
 
 ---
 
 ## Tech Stack
 
-Backend: Node.js, Express.js
-Database: MySQL
-Tools: Postman
+* Backend: Node.js, Express.js
+* Database: MySQL
+* Tools: Postman
 
 ---
 
 ## Installation
 
-## 1. Clone the repository
+### 1. Clone the repository
 
-   git clone https://github.com/VedantTathe/Educase_Assignment_Schools_Management_API.git
-   cd Educase_Assignment_Schools_Management_API
-   
+```bash
+git clone https://github.com/VedantTathe/Educase_Assignment_Schools_Management_API.git
+cd Educase_Assignment_Schools_Management_API
+```
 
-## 2. Install dependencies
+### 2. Install dependencies
 
-   npm install
-   
-## 3. Create .env file
-   Add your MySQL credentials and config:
-   
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=your_password
-   DB_NAME=school_management
-   PORT=5000
+```bash
+npm install
+```
 
-## 4. Set up your MySQL database
+### 3. Create .env file
 
-   CREATE DATABASE school_management;
+Add your MySQL credentials and config:
 
-   USE school_management;
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=school_management
+PORT=5000
+```
 
-   CREATE TABLE school (
-     id INT AUTO_INCREMENT PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-     address VARCHAR(255) NOT NULL,
-     latitude FLOAT NOT NULL,
-     longitude FLOAT NOT NULL
-   );
-   
-## 5. Start the server
+### 4. Set up your MySQL database
 
-   npm start
-   
+```sql
+CREATE DATABASE school_management;
+
+USE school_management;
+
+CREATE TABLE school (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  latitude FLOAT NOT NULL,
+  longitude FLOAT NOT NULL
+);
+```
+
+### 5. Start the server
+
+```bash
+npm start
+```
+
 ---
 
 ## API Endpoints
 
-## 1. Add School
+### 1. Add School
 
-Endpoint: POST /addSchool
-Body (JSON):
+* Endpoint: `POST /addSchool`
+* Body (JSON):
+
+```json
 {
   "name": "Sunrise Public School",
   "address": "Nagpur",
   "latitude": 21.1458,
   "longitude": 79.0882
 }
+```
 
-## 2. List Schools by Proximity
+### 2. List Schools by Proximity
 
-Endpoint: GET /listSchools
-Query Params:
-latitude
-longitude
+* Endpoint: `GET /listSchools`
+* Query Params:
 
-Example:
+  * latitude
+  * longitude
+* Example:
+
+```
 GET /listSchools?latitude=19.0760&longitude=72.8777
+```
 
-## 3. Delete School
+### 3. Delete School
 
-Endpoint: DELETE /deleteSchool/:id
-Example:
+* Endpoint: `DELETE /deleteSchool/:id`
+* Example:
+
+```
 DELETE /deleteSchool/3
+```
 
 ---
 
 ## Live API (for testing)
 
-> Deployed on: **https://educase-assignment-schools-management-api.vercel.app/**
+> Deployed on: **[https://educase-assignment-schools-management-api.vercel.app/](https://educase-assignment-schools-management-api.vercel.app/)**
 
 ---
 
@@ -114,5 +133,5 @@ The collection includes:
 ## About the Developer
 
 **Name**: Vedant Tathe
-**Email**: \[[your.email@example.com](mailto:tathevedant70@gmail.com)]
+**Email**: [tathevedant70@gmail.com](mailto:tathevedant70@gmail.com)
 **GitHub**: [VedantTathe](https://github.com/VedantTathe)
