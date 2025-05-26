@@ -33,4 +33,32 @@ router.post('/addSchool', (req, res) => {
 
 
 
+
+
+router.get('/listSchools', (req, res) => {
+
+    try {
+
+
+        db.query('select * from school', (err, result) => {
+            if (err) {
+                console.log("error = ", err);
+                return res.status(500).json({ "error": "Database Error" });
+            }
+
+            
+            console.log("Successfully Retrived..!");
+            return res.status(200).send(result)
+        });
+
+    }
+    catch (err) {
+        console.log("Error", err);
+        return res.status(400).json({ "error": err });
+    }
+});
+
+
+
+
 module.exports = router;
